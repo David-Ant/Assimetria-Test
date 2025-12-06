@@ -1,13 +1,23 @@
 services:
   frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL}
     image: frontend
     stdin_open: true
     ports: 
       - "5173:80"
+    depends_on:
+      - backend
     networks:
       - assimetria-app
 
   backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
     image: backend
     ports: 
       - "4000:4000"
