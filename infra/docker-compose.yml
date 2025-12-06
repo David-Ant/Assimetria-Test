@@ -1,0 +1,21 @@
+services:
+  frontend:
+    image: frontend
+    stdin_open: true
+    ports: 
+      - "5173:80"
+    networks:
+      - assimetria-app
+
+  backend:
+    image: backend
+    ports: 
+      - "4000:4000"
+    environment:
+      - PORT=4000
+    networks:
+      - assimetria-app
+
+networks:
+  assimetria-app:
+    driver: bridge
