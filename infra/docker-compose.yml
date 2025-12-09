@@ -5,10 +5,11 @@ services:
       dockerfile: Dockerfile
       args:
         VITE_API_URL: ${VITE_API_URL}
-    image: frontend
+    image: 661041596293.dkr.ecr.eu-north-1.amazonaws.com/frontend:latest
     stdin_open: true
     ports: 
       - "5173:80"
+    restart: always
     depends_on:
       - backend
     networks:
@@ -18,9 +19,10 @@ services:
     build:
       context: ../backend
       dockerfile: Dockerfile
-    image: backend
+    image: 661041596293.dkr.ecr.eu-north-1.amazonaws.com/backend:latest
     ports: 
       - "4000:4000"
+    restart: always
     environment:
       - PORT=4000
       - DATABASE_URL=${DATABASE_URL}
