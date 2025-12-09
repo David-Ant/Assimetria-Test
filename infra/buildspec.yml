@@ -1,0 +1,55 @@
+version: 0.2
+
+env:
+  variables:
+    BACKEND_IMAGE_NAME: "backend"
+    FRONTEND_IMAGE_NAME: "frontend"
+
+phases:
+  install:
+    commands:
+      - echo "Installing dependencies..."
+      - yum update -y
+
+  pre_build:
+    commands:
+      - echo "Logging in to Amazon ECR..."
+      - aws --version
+      - ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
+      - REGION=$(aws configure get region)
+      - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
+      
+      - BACKEND_REPO=$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$BACKEND_IMAGE_NAME
+      - FRONTEND_REPO=$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$FRONTEND_IMAGE_NAME
+      
+      - echo "Backend repo: $BACKEND_REPO"
+      - echo "Frontend repo: $FRONTEND_REPO"
+
+  build:
+    commands:
+      - echo "Building Docker images..."
+
+      # Backend
+      - echo "Building backend image..."
+      - docker build -t $BACKEND_IMAGE_NAME ./backend
+      - docker tag $BACKEND_IMAGE_NAME:latest $BACKEND_REPO:latest
+
+      # Frontend
+      - echo "Building frontend image..."
+      - docker build -t $FRONTEND_IMAGE_NAME ./frontend
+      - docker tag $FRONTEND_IMAGE_NAME:latest $FRONTEND_REPO:latest
+
+  post_build:
+    commands:
+      - echo "Pushing images to ECR…"
+      - docker push $BACKEND_REPO:latest
+      - docker push $FRONTEND_REPO:latest
+
+      - echo "Writing image definitions for deployment…"
+      - printf '[{"name":"backend","imageUri":"%s"}]' $BACKEND_REPO:latest > backend-imagedefinitions.json
+      - printf '[{"name":"frontend","imageUri":"%s"}]' $FRONTEND_REPO:latest > frontend-imagedefinitions.json
+
+artifacts:
+  files:
+    - backend-imagedefinitions.json
+    - frontend-imagedefinitions.json
