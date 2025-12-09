@@ -22,9 +22,6 @@ phases:
       - BACKEND_REPO=$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$BACKEND_IMAGE_NAME
       - FRONTEND_REPO=$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$FRONTEND_IMAGE_NAME
       
-      - echo "Backend repo: $BACKEND_REPO"
-      - echo "Frontend repo: $FRONTEND_REPO"
-
   build:
     commands:
       - echo "Building Docker images..."
