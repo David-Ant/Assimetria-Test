@@ -68,7 +68,8 @@ cd Assimetria-Test/infra
 echo "[6/6] Logging into ECR and starting Docker Compose..."
 
 # Fetch AWS ACCOUNT and REGION automatically
-REGION=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | grep region | awk -F\" '{print $4}')
+TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+REGION=$(curl -s -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/dynamic/instance-identity/document | grep region | awk -F\" '{print $4}')
 ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
 
 echo "Using REGION: $REGION"
