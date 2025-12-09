@@ -16,7 +16,7 @@ phases:
       - echo "Logging in to Amazon ECR..."
       - aws --version
       - ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
-      - REGION=$(aws configure get region)
+      - REGION=$AWS_REGION
       - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
       
       - BACKEND_REPO=$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$BACKEND_IMAGE_NAME
