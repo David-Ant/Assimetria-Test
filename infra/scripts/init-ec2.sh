@@ -16,7 +16,7 @@ sudo yum update -y
 ###############################################
 
 echo "[2/6] Installing Docker..."
-sudo amazon-linux-extras install docker -y
+sudo dnf install -y docker
 sudo systemctl start docker
 sudo systemctl enable docker
 sudo usermod -aG docker ec2-user  # allow ec2-user to use Docker without sudo
