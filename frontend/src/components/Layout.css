@@ -1,0 +1,29 @@
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.layout-header {
+    background-color: #151515;
+    padding: 1em;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.layout-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.layout-footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #151515;
+    padding: 25px 80px;
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+}
