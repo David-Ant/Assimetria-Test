@@ -4,10 +4,11 @@ import { PrismaClient } from "../../generated/prisma/client/client.js";
 
 const adapter = new PrismaPg({
     connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
 });
 
 const articleRoutes = Router();
-const prisma = new PrismaClient({adapter, ssl: { rejectUnauthorized: false }});
+const prisma = new PrismaClient({adapter});
 
 articleRoutes.get("/", async (req, res) => {
     try {
