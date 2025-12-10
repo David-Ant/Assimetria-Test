@@ -54,16 +54,9 @@ jobs:
           echo "${{ secrets.EC2_PRIVATE_KEY }}" > ~/.ssh/deploy_key.pem
           chmod 600 ~/.ssh/deploy_key.pem
 
-      - name: Deploy to EC2 (debug)
+      - name: Deploy to EC2
         run: |
-          echo "Checking current directory..."
-          pwd
-
-          echo "Listing repo contents recursively..."
-          ls -R
-
-          echo "Attempting SSH deploy (may fail if path is wrong)..."
           ssh -o StrictHostKeyChecking=no \
               -i ~/.ssh/deploy_key.pem \
               ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
-              "bash -s" < ./Assimetria-Test/infra/scripts/init-ec2.sh
+              "bash -s" < ./infra/scripts/init-ec2.sh
