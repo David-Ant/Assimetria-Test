@@ -7,9 +7,8 @@ const adapter = new PrismaPg({
 });
 
 const articleRoutes = Router();
-const prisma = new PrismaClient({adapter});
+const prisma = new PrismaClient({adapter, ssl: { rejectUnauthorized: false }});
 
-// Temporary placeholder methods
 articleRoutes.get("/", async (req, res) => {
     try {
         const articles = await prisma.article.findMany();
@@ -50,14 +49,6 @@ articleRoutes.post("/", async (req, res) => {
     } catch (error) {
         res.status(500).send({ error: "Error creating article" });
     }
-});
-
-articleRoutes.put("/", (req, res) => {
-    res.send({ data: "Article updated"});
-});
-
-articleRoutes.delete("/", (req, res) => {
-    res.send({ data: "Article deleted"});
 });
 
 export default articleRoutes;
