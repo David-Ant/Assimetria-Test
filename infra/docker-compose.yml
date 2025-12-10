@@ -21,6 +21,7 @@ services:
       - PORT=4000
       - DATABASE_URL=${DATABASE_URL}
       - HF_TOKEN=${HF_TOKEN}
+      - FRONTEND_URL=${FRONTEND_URL}
     networks:
       - assimetria-app
 
