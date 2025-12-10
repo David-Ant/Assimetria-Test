@@ -92,6 +92,6 @@ docker-compose up -d
 echo "===== EC2 Initialization Completed ====="
 echo "Backend and Frontend should now be running!"
 echo "------------------------------------------"
-echo "Backend: http://<EC2-PUBLIC-IP>:4000"
-echo "Frontend: http://<EC2-PUBLIC-IP>:5173"
+echo "Backend: http://ec2-51-21-127-8.eu-north-1.compute.amazonaws.com:4000"
+echo "Frontend: http://ec2-51-21-127-8.eu-north-1.compute.amazonaws.com:5173"
 echo "------------------------------------------"
