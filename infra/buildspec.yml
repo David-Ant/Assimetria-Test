@@ -30,6 +30,7 @@ phases:
       - docker tag $BACKEND_IMAGE_NAME:latest $BACKEND_REPO:latest
 
       - echo "Building frontend image..."
+      - echo "VITE_API_URL is $VITE_API_URL"
       - docker build \
           --build-arg VITE_API_URL=$VITE_API_URL \
           -t $FRONTEND_IMAGE_NAME \
