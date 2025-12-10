@@ -26,6 +26,7 @@ services:
     environment:
       - PORT=4000
       - DATABASE_URL=${DATABASE_URL}
+      - HF_TOKEN=${HF_TOKEN}
     depends_on:
       postgres:
         condition: service_healthy
