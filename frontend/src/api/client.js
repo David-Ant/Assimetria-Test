@@ -9,6 +9,7 @@ export async function fetchData() {
     console.log("API_BASE_URL:", API_BASE_URL);
     return await response.json();
   } catch (error) {
+    console.error("API_BASE_URL:", API_BASE_URL);
     console.error("Error fetching data:", error);
     return null;
   }

@@ -3,11 +3,11 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-  server: {
+  /* server: {
     proxy: {
       '/articles': import.meta.env.VITE_API_URL+'/articles',
     }
-  },
+  }, */
   plugins: [
     react({
       babel: {
