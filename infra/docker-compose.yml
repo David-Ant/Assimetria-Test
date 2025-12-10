@@ -1,13 +1,8 @@
 services:
   frontend:
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
-      args:
-        VITE_API_URL: ${VITE_API_URL}
     image: 661041596293.dkr.ecr.eu-north-1.amazonaws.com/frontend:latest
     stdin_open: true
-    ports: 
+    ports:
       - "5173:80"
     restart: always
     depends_on:
@@ -16,50 +11,17 @@ services:
       - assimetria-app
 
   backend:
-    build:
-      context: ../backend
-      dockerfile: Dockerfile
     image: 661041596293.dkr.ecr.eu-north-1.amazonaws.com/backend:latest
-    ports: 
+    ports:
       - "4000:4000"
     restart: always
     environment:
       - PORT=4000
       - DATABASE_URL=${DATABASE_URL}
       - HF_TOKEN=${HF_TOKEN}
-    depends_on:
-      postgres:
-        condition: service_healthy
     networks:
       - assimetria-app
-
-  postgres:
-    image: postgres:15
-    restart: always
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=prisma
-    ports:
-      - "5432:5432"
-    networks:
-      - assimetria-app
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
-      interval: 5s
-      timeout: 2s
-      retries: 20
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    command: postgres -c listen_addresses='*'
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "3"
 
 networks:
   assimetria-app:
     driver: bridge
-
-volumes:
-  postgres_data:
