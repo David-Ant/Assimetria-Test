@@ -59,4 +59,4 @@ jobs:
           ssh -o StrictHostKeyChecking=no \
               -i ~/.ssh/deploy_key.pem \
               ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
-              "bash -s" < .Assimetria-Test/infra/scripts/init-ec2.sh
+              "bash -s" < ./Assimetria-Test/infra/scripts/init-ec2.sh
