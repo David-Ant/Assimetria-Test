@@ -59,4 +59,4 @@ jobs:
           ssh -o StrictHostKeyChecking=no \
               -i ~/.ssh/deploy_key.pem \
               ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
-              "bash -s" < ./infra/scripts/init-ec2.sh
+              "sudo bash -s" < ./infra/scripts/init-ec2.sh
