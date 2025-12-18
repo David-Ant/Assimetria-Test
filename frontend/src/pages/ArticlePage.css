@@ -1,0 +1,42 @@
+.article-card {
+  max-width: 750px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #3b3b3b;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  color: #e0e0e0;
+}
+
+.article-card h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+.article-content p {
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+}
+
+.article-content strong {
+  font-weight: 700;
+  color: #fff;
+}
+
+.article-content h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: #fff;
+}
+
+.article-date {
+  display: block;
+  margin-top: 2rem;
+  font-size: 0.875rem;
+  color: #aaa;
+  text-align: right;
+}

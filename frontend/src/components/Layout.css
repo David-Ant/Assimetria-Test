@@ -10,6 +10,7 @@
     text-align: center;
     font-size: 24px;
     font-weight: bold;
+    box-shadow: 0 0 10px #151515;
 }
 
 .layout-content {
@@ -26,4 +27,5 @@
     text-align: center;
     font-size: 14px;
     color: #777;
+    box-shadow: 0 0 10px #151515;
 }

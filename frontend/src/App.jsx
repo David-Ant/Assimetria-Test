@@ -27,7 +27,7 @@ function App() {
             return (
               <div key={id}>{
                 <Link to={`/article/${id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                  <BlogCard title={title} summary={getExcerpt(content)} date={createdAt} />
+                  <BlogCard title={title.replace(/\*\*/g, '')} summary={getExcerpt(content)} date={createdAt} />
                 </Link>
               }
               </div>
