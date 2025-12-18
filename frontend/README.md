@@ -1,18 +1,80 @@
-# React + Vite
+# Assimetria-Test — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Minimal React + Vite frontend for the Assimetria project. This app communicates with the backend APIs and provides a simple UI for browsing articles.
 
-Currently, two official plugins are available:
+## Quick Start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Prerequisites:
+- Node.js (v16+ recommended)
+- npm (or yarn)
 
-## React Compiler
+Install dependencies and start the dev server:
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-Note: This will impact Vite dev & build performances.
+Open the app at the URL printed by Vite (typically `http://localhost:5173` for local development).
 
-## Expanding the ESLint configuration
+## Environment
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Copy the example env file and set any necessary values:
+
+```bash
+cd frontend
+copy .env.example .env
+```
+
+Common variables (see `.env.example`):
+- `VITE_API_BASE` — base URL for the backend API
+
+The app uses Vite's `VITE_` prefix for env variables accessible in the browser.
+
+## Scripts
+
+- `npm run dev` — start Vite dev server with HMR
+- `npm run build` — build production assets into `dist/`
+- `npm run preview` — locally preview the production build
+
+Run the build:
+
+```bash
+cd frontend
+npm run build
+npm run preview
+```
+
+## Project Structure (key files)
+
+- `index.html` — app HTML entry
+- `src/main.jsx` — React bootstrapping
+- `src/App.jsx` — top-level app component
+- `src/pages/ArticlePage.jsx` — article view
+- `src/components/BlogCard.jsx` — article card component
+- `src/api/client.js` — API client (uses `VITE_API_BASE`)
+- `src/*.css` — styles
+
+## Connecting to Backend
+
+Set `VITE_API_BASE` to point to the backend. The frontend expects the backend to expose article APIs under a REST path used in `src/api/client.js`.
+
+If you run both services locally using the project root `docker-compose.yml`, ensure the frontend's `VITE_API_BASE` points to the backend service name or mapped host/port.
+
+## Docker
+
+There is a `Dockerfile` in the frontend folder. To build the image:
+
+```bash
+cd frontend
+docker build -t assimetria-frontend .
+```
+
+You can also use the repository-level `docker-compose.yml` to run both frontend and backend together.
+
+## Notes for Developers
+
+- The frontend was initialized with Vite; feel free to migrate to TypeScript if you want stronger typing.
+- Keep the `VITE_` env prefix for variables exposed to client code.
+- Update `src/api/client.js` if backend routes change.
